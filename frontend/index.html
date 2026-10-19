@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Book inspiring fitness classes at Forma Studio." />
+    <title>Forma Studio | Move with purpose</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#home" aria-label="Forma Studio home">FOR<span>·</span>MA</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu <span></span></button>
+      <nav id="primary-nav" class="nav-links" aria-label="Primary navigation">
+        <a href="#classes">Classes</a>
+        <a href="#bookings" data-auth-only hidden>My bookings</a>
+        <a href="#create" data-auth-only data-roles="host admin" hidden>Host a class</a>
+        <a href="#admin" data-auth-only data-roles="admin" hidden>Admin guide</a>
+        <button class="nav-login" type="button" data-open-auth="login">Log in</button>
+        <button class="nav-join" type="button" data-open-auth="signup">Join the studio</button>
+        <button class="nav-logout" type="button" data-logout hidden>Log out</button>
+      </nav>
+    </header>
+
+    <main>
+      <section id="home" class="hero section">
+        <div class="hero-copy">
+          <p class="eyebrow">A different kind of training</p>
+          <h1>Move better.<br /><em>Feel alive.</em></h1>
+          <p class="hero-text">A considered collection of strength, mobility and mindful movement classes — designed around the person you are today.</p>
+          <div class="hero-actions">
+            <a class="button button-dark" href="#classes">Explore classes <span>→</span></a>
+            <button class="text-button" type="button" data-open-auth="signup">Become a member <span>↗</span></button>
+          </div>
+          <div class="hero-meta"><span>INDIA'S FINEST<br />MOVEMENT SPACE</span><span class="meta-rule"></span><span>EST. 2024</span></div>
+        </div>
+        <div class="hero-art" aria-label="Studio movement illustration">
+          <div class="sun"></div><div class="arch arch-one"></div><div class="arch arch-two"></div><div class="arch arch-three"></div>
+          <p>FORM IS<br />FREEDOM</p>
+          <div class="hero-badge">MOVE<br />WITH<br />INTENT</div>
+        </div>
+      </section>
+
+      <section class="intro section">
+        <p class="eyebrow">The Forma approach</p>
+        <h2>Training that meets you <em>where you are.</em></h2>
+        <p>Whether you are rebuilding, reaching further or simply making time for yourself, our intimate sessions make room for the whole you.</p>
+        <div class="principles"><article><span>01</span><h3>Small rooms</h3><p>Limited spots, real attention.</p></article><article><span>02</span><h3>Expert guides</h3><p>Teachers who see the details.</p></article><article><span>03</span><h3>Your rhythm</h3><p>Come as often as life allows.</p></article></div>
+      </section>
+
+      <section id="classes" class="classes-section section">
+        <div class="section-heading"><div><p class="eyebrow">On the schedule</p><h2>Find your <em>flow.</em></h2></div><button id="refresh-classes" class="text-button" type="button">Refresh schedule <span>↻</span></button></div>
+        <div id="classes-status" class="inline-status" role="status"></div>
+        <div id="classes-grid" class="classes-grid" aria-live="polite"></div>
+      </section>
+
+      <section id="bookings" class="bookings-section section" data-auth-section hidden>
+        <div class="section-heading"><div><p class="eyebrow">Your practice</p><h2>My <em>bookings.</em></h2></div><button id="refresh-bookings" class="text-button" type="button">Refresh <span>↻</span></button></div>
+        <div id="bookings-status" class="inline-status" role="status"></div>
+        <div id="bookings-list" class="bookings-list" aria-live="polite"></div>
+      </section>
+
+      <section id="create" class="create-section section" data-auth-section data-roles="host admin" hidden>
+        <div><p class="eyebrow">For instructors</p><h2>Share your <em>practice.</em></h2><p class="form-intro">Add a future studio session to the live schedule. All times are saved in India Standard Time.</p></div>
+        <form id="class-form" class="class-form" novalidate>
+          <label>Class name<input name="name" type="text" maxlength="100" required placeholder="e.g. Morning Mobility" /></label>
+          <label>Instructor<input name="instructor" type="text" maxlength="100" required placeholder="Your name" /></label>
+          <label>Date and time (IST)<input name="date_time" type="datetime-local" required /></label>
+          <label>Available places<input name="total_slots" type="number" min="1" max="1000" required placeholder="12" /></label>
+          <button class="button button-light" type="submit">Publish class <span>→</span></button>
+          <p class="form-message" role="status"></p>
+        </form>
+      </section>
+      <section id="admin" class="admin-section section" data-auth-section data-roles="admin" hidden>
+        <p class="eyebrow">Studio administration</p><h2>Protect the <em>practice.</em></h2>
+        <p>Host access is intentionally assigned from the trusted local administration command, not from this public website. See the README for the reviewed promotion procedure.</p>
+      </section>
+    </main>
+
+    <footer><a class="brand" href="#home">FOR<span>·</span>MA</a><p>Made for intentional movement.</p><p>All class times are shown in IST.</p></footer>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <div id="auth-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="auth-title" hidden>
+      <div class="modal-backdrop" data-close-modal></div>
+      <section class="modal-panel">
+        <button class="close-button" type="button" aria-label="Close" data-close-modal>×</button>
+        <p class="eyebrow" id="auth-kicker">Welcome to Forma</p><h2 id="auth-title">Your next class starts here.</h2>
+        <div class="auth-tabs" role="tablist"><button type="button" role="tab" data-auth-tab="login">Log in</button><button type="button" role="tab" data-auth-tab="signup">Create account</button></div>
+        <form id="login-form" class="auth-form" novalidate>
+          <label>Email<input name="email" type="email" autocomplete="email" required placeholder="you@example.com" /></label>
+          <label>Password<input name="password" type="password" autocomplete="current-password" minlength="1" required placeholder="Your password" /></label>
+          <button class="button button-dark" type="submit">Log in <span>→</span></button><p class="form-message" role="status"></p>
+        </form>
+        <form id="signup-form" class="auth-form" novalidate hidden>
+          <label>Your name<input name="name" type="text" autocomplete="name" minlength="1" maxlength="100" required placeholder="Your name" /></label>
+          <label>Email<input name="email" type="email" autocomplete="email" required placeholder="you@example.com" /></label>
+          <label>Password<input name="password" type="password" autocomplete="new-password" minlength="8" maxlength="72" required placeholder="At least 8 characters" /></label>
+          <button class="button button-dark" type="submit">Create account <span>→</span></button><p class="form-message" role="status"></p>
+        </form>
+      </section>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
